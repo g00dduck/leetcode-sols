@@ -4,6 +4,21 @@ You can return the answer in any order.
 import itertools
 
 class Solution:
+    def find_perms_recursive(self, nums):
+        def backtrack(index: int):
+            if index == len(nums):
+                permutations.append(nums[:])
+
+            for inner in range(index, len(nums)):
+                nums[index], nums[inner] = nums[inner], nums[index]
+                backtrack(index + 1)
+                nums[index], nums[inner] = nums[inner], nums[index]
+
+        permutations = []
+        backtrack(0)
+
+        return permutations
+
     def find_perms_itertools(self, nums):
         permutations = []
 
@@ -29,7 +44,8 @@ def main():
 
             print(f'\nYou gave me: {nums}.')
             print(f"\nThe permutations of these numbers are:\n" +
-                f"\tMethod 1: {Solution().find_perms_itertools(nums)}\n")
+                f"\tMethod 1: {Solution().find_perms_itertools(nums)}\n"
+                f"\tMethod 2: {Solution().find_perms_recursive(nums)}\n")
 
         except EOFError:
             break
