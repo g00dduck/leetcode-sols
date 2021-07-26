@@ -17,12 +17,16 @@ class Solution:
         permutations = []
         backtrack(0)
 
-        return permutations
+        perms_unique = []
+        for perm_set in set(map(tuple, permutations)):
+            perms_unique.append([item for item in perm_set])
+
+        return perms_unique
 
     def find_perms_itertools(self, nums):
         permutations = []
 
-        for perm_set in itertools.permutations(nums):
+        for perm_set in set(itertools.permutations(nums)):
             perm_array = []
             for item in perm_set:
                 perm_array.append(item)
